@@ -1,0 +1,44 @@
+/**
+ *
+ * Poll on Index. An extension for the phpBB Forum Software package.
+ *
+ * @copyright (c) 2018, kasimi, https://kasimi.net
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ */
+
+.poll-on-index-category {
+	display: none;
+	height: 0;
+}
+
+.poll-on-index .collapse-btn {
+	display: none;
+	line-height: 0;
+}
+
+.poll-on-index li.header dt {
+	margin-right: -1px;
+}
+
+.poll-on-index li.header dt .list-inner {
+	margin-right: 0;
+}
+
+.poll-on-index .panel {
+	border-radius: 0;
+	margin: 0;
+	padding: 5px;
+}
+
+.poll-on-index .poll_option_select {
+	width: auto;
+}
+
+.poll-on-index .poll_vote {
+	border-top: none;
+}
+
+.poll-on-index .poll_view_results {
+	border-top: none;
+}

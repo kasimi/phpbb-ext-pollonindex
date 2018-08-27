@@ -1,0 +1,17 @@
+services:
+    kasimi.pollonindex.listener:
+        class: kasimi\pollonindex\event\listener
+        arguments:
+            - '@user'
+            - '@language'
+            - '@auth'
+            - '@request'
+            - '@config'
+            - '@dbal.conn'
+            - '@template'
+            - '@dispatcher'
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '@?phpbb.collapsiblecategories.operator'
+        tags:
+            - { name: event.listener }

@@ -1,0 +1,16 @@
+{% if S_CAN_SHOW_POLL_INDEX %}
+	<dl>
+		<dt>
+			<label for="poll_on_index">{{ lang('SHOW_POLL_ON_INDEX') ~ lang('COLON') }}</label>
+		</dt>
+		<dd>
+			<label>
+				<select id="poll_on_index" name="poll_on_index">
+					<option value="{{ constant('kasimi\\pollonindex\\ext::POLL_ON_INDEX_NO') }}"{% if POLL_ON_INDEX == constant('kasimi\\pollonindex\\ext::POLL_ON_INDEX_NO') %} selected{% endif %}>{{ lang('SHOW_POLL_ON_INDEX_NO') }}</option>
+					<option value="{{ constant('kasimi\\pollonindex\\ext::POLL_ON_INDEX_YES_INDEFINITELY') }}"{% if POLL_ON_INDEX == constant('kasimi\\pollonindex\\ext::POLL_ON_INDEX_YES_INDEFINITELY') %} selected{% endif %}>{{ lang('SHOW_POLL_ON_INDEX_YES_INDEFINITELY') }}</option>
+					<option value="{{ constant('kasimi\\pollonindex\\ext::POLL_ON_INDEX_YES_END') }}"{% if POLL_ON_INDEX == constant('kasimi\\pollonindex\\ext::POLL_ON_INDEX_YES_END') %} selected{% endif %}>{{ lang('SHOW_POLL_ON_INDEX_YES_END') }}</option>
+				</select>
+			</label>
+		</dd>
+	</dl>
+{% endif %}

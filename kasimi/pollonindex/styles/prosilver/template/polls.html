@@ -1,0 +1,70 @@
+{% if polls %}
+	{% INCLUDECSS '@kasimi_pollonindex/pollonindex.css' %}
+{% endif %}
+
+{% for poll in polls %}
+	<div class="poll-on-index">
+		{% EVENT viewtopic_body_poll_before %}
+		{% if poll.S_CAN_HIDE_CATEGORY %}
+			<a class="category poll-on-index-category{% if poll.S_CATEGORY_HIDDEN %} hidden-category{% endif %}"></a>
+		{% endif %}
+		<div class="forabg">
+			<ul class="topiclist">
+				<li class="header">
+					<dl class="row-item">
+						<dt>
+							<div class="list-inner">
+								<a href="{{ poll.S_POLL_ACTION }}"><i class="icon fa-bar-chart fa-fw" aria-hidden="true"></i><span>{{ lang('SHOW_POLL_ON_INDEX_TITLE') ~ lang('COLON') }} {{ poll.POLL_QUESTION }}</span></a>
+							</div>
+						</dt>
+					</dl>
+					{% if poll.S_CAN_HIDE_CATEGORY %}
+						<a href="{{ poll.U_CATEGORY_COLLAPSE_URL }}" class="collapse-btn collapse-{{ poll.S_CATEGORY_HIDDEN ? 'show' : 'hide' }}" data-hidden="{{ poll.S_CATEGORY_HIDDEN }}" data-ajax="phpbb_collapse" data-overlay="true" title="{{ lang('COLLAPSIBLE_CATEGORIES_TITLE') }}"></a>
+					{% endif %}
+				</li>
+			</ul>
+			<form method="post" action="{poll.S_POLL_ACTION}" data-ajax="vote_poll" class="topic_poll collapsible">
+				<div class="panel">
+					<div class="inner">
+						<div class="content">
+							<h2 class="poll-title">{% EVENT viewtopic_body_poll_question_prepend %}{{ poll.POLL_QUESTION }}{% EVENT viewtopic_body_poll_question_append %}</h2>
+							<p class="author">{{ poll.L_POLL_LENGTH }}{% if poll.S_CAN_VOTE and poll.L_POLL_LENGTH %}<br>{% endif %}{% if poll.S_CAN_VOTE %}<span class="poll_max_votes">{{ poll.L_MAX_VOTES }}</span>{% endif %}</p>
+							<fieldset class="polls">
+								{% for poll_option in poll.poll_options %}
+									{% EVENT viewtopic_body_poll_option_before %}
+									<dl class="{% if poll_option.POLL_OPTION_VOTED %}voted{% endif %}{% if poll_option.POLL_OPTION_MOST_VOTES %} most-votes{% endif %}"{% if poll_option.POLL_OPTION_VOTED %} title="{{ lang('POLL_VOTED_OPTION') }}"{% endif %} data-alt-text="{{ lang('POLL_VOTED_OPTION') }}" data-poll-option-id="{{ poll_option.POLL_OPTION_ID }}">
+										<dt>{% if poll.S_CAN_VOTE %}<label for="vote_{{ poll_option.POLL_OPTION_ID }}">{{ poll_option.POLL_OPTION_CAPTION }}</label>{% else %}{{ poll_option.POLL_OPTION_CAPTION }}{% endif %}</dt>
+										{% if poll.S_CAN_VOTE %}<dd class="poll_option_select">{% if poll.S_IS_MULTI_CHOICE %}<input type="checkbox" name="vote_id[]" id="vote_{{ poll_option.POLL_OPTION_ID }}" value="{{ poll_option.POLL_OPTION_ID }}"{% if poll_option.POLL_OPTION_VOTED %} checked="checked"{% endif %}>{% else %}<input type="radio" name="vote_id[]" id="vote_{{ poll_option.POLL_OPTION_ID }}" value="{{ poll_option.POLL_OPTION_ID }}"{% if poll_option.POLL_OPTION_VOTED %} checked="checked"{% endif %}>{% endif %}</dd>{% endif %}
+										<dd class="resultbar{% if not poll.S_DISPLAY_RESULTS %} hidden{% endif %}"><div class="{% if poll_option.POLL_OPTION_PCT < 20 %}pollbar1{% elseif poll_option.POLL_OPTION_PCT < 40 %}pollbar2{% elseif poll_option.POLL_OPTION_PCT < 60 %}pollbar3{% elseif poll_option.POLL_OPTION_PCT < 80 %}pollbar4{% else %}pollbar5{% endif %}" style="width:{{ poll_option.POLL_OPTION_PERCENT_REL }};">{{ poll_option.POLL_OPTION_RESULT }}</div></dd>
+										<dd class="poll_option_percent{% if not poll.S_DISPLAY_RESULTS %} hidden{% endif %}">{% if poll_option.POLL_OPTION_RESULT == 0 %}{{ lang('NO_VOTES') }}{% else %}{{ poll_option.POLL_OPTION_PERCENT }}{% endif %}</dd>
+									</dl>
+									{% EVENT viewtopic_body_poll_option_after %}
+								{% endfor %}
+								<dl class="poll_total_votes{% if not poll.S_DISPLAY_RESULTS %} hidden{% endif %}">
+									<dt>&nbsp;</dt>
+									<dd class="resultbar">{{ lang('TOTAL_VOTES') ~ lang('COLON') }} <span class="poll_total_vote_cnt">{{ poll.TOTAL_VOTES }}</span></dd>
+								</dl>
+								{% if poll.S_CAN_VOTE %}
+									<dl class="poll_vote">
+										<dt>&nbsp;</dt>
+										<dd class="resultbar"><input type="submit" name="update" value="{{ lang('SUBMIT_VOTE') }}" class="button1"></dd>
+									</dl>
+								{% endif %}
+								{% if not poll.S_DISPLAY_RESULTS %}
+									<dl class="poll_view_results">
+										<dt>&nbsp;</dt>
+										<dd class="resultbar"><a href="{{ poll.U_VIEW_RESULTS }}">{{ lang('VIEW_RESULTS') }}</a></dd>
+									</dl>
+								{% endif %}
+							</fieldset>
+							<div class="vote-submitted hidden">{{ lang('VOTE_SUBMITTED') }}</div>
+						</div>
+					</div>
+				</div>
+				{{ S_FORM_TOKEN }}
+				{{ S_HIDDEN_FIELDS }}
+			</form>
+		</div>
+		{% EVENT viewtopic_body_poll_after %}
+	</div>
+{% endfor %}
