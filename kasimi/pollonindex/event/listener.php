@@ -109,7 +109,7 @@ class listener implements EventSubscriberInterface
 	public function index_modify_page_title()
 	{
 		$topics = $this->sql_query([
-			'SELECT'	=> 't.topic_id, t.topic_first_post_id, t.topic_status, t.poll_start, t.poll_length, t.poll_title, t.poll_max_options, t.poll_vote_change, t.forum_id, f.forum_status',
+			'SELECT'	=> 't.topic_id, t.topic_title, t.topic_first_post_id, t.topic_status, t.poll_start, t.poll_length, t.poll_title, t.poll_max_options, t.poll_vote_change, t.forum_id, f.forum_status',
 			'FROM'		=> [TOPICS_TABLE => 't'],
 			'LEFT_JOIN'	=> [
 				[
@@ -249,6 +249,7 @@ class listener implements EventSubscriberInterface
 			$viewtopic_url = append_sid($this->root_path . 'viewtopic.' . $this->php_ext, ['f' => $topic_data['forum_id'], 't' => $topic_data['topic_id']]);
 
 			$poll_template_data = [
+				'TOPIC_TITLE'			=> $topic_data['topic_title'],
 				'POLL_QUESTION'			=> $topic_data['poll_title'],
 				'TOTAL_VOTES' 			=> $poll_total,
 				'POLL_LEFT_CAP_IMG'		=> $this->user->img('poll_left'),

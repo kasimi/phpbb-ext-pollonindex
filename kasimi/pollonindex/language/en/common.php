@@ -35,7 +35,6 @@ if (empty($lang) || !is_array($lang))
 // ’ » “ ” …
 
 $lang = array_merge($lang, [
-	'SHOW_POLL_ON_INDEX_TITLE'				=> 'Poll',
 	'SHOW_POLL_ON_INDEX'					=> 'Show poll on index',
 	'SHOW_POLL_ON_INDEX_NO'					=> 'No',
 	'SHOW_POLL_ON_INDEX_YES_INDEFINITELY'	=> 'Yes, indefinitely',
