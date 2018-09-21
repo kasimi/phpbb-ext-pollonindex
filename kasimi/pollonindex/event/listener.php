@@ -160,7 +160,8 @@ class listener implements EventSubscriberInterface
 			else
 			{
 				$cookie_name = $this->config['cookie_name'] . '_poll_' . $topic_data['topic_id'];
-				$cur_voted_id = explode(',', $this->request->variable($cookie_name, '', true, request_interface::COOKIE));
+				$cur_voted_id = $this->request->variable($cookie_name, '', true, request_interface::COOKIE);
+				$cur_voted_id = $cur_voted_id ? explode(',', $cur_voted_id) : [];
 				$cur_voted_id = array_map('intval', $cur_voted_id);
 			}
 
