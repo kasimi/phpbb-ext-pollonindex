@@ -21,7 +21,7 @@ class m1_initial_schema extends migration
 	 */
 	public static function depends_on()
 	{
-		return ['\phpbb\db\migration\data\v320\v320'];
+		return ['\phpbb\db\migration\data\v32x\v324'];
 	}
 
 	/**
