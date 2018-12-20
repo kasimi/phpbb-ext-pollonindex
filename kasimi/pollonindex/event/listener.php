@@ -327,7 +327,7 @@ class listener implements EventSubscriberInterface
 
 			$event['page_data'] = array_merge($event['page_data'], [
 				'S_CAN_SHOW_POLL_INDEX'	=> true,
-				'POLL_ON_INDEX'			=> $this->request->is_set('poll_on_index') ? $this->request->variable('poll_on_index', ext::POLL_ON_INDEX_NO) : $event['post_data']['poll_on_index'],
+				'POLL_ON_INDEX'			=> $this->request->variable('poll_on_index', isset($event['post_data']['poll_on_index']) ? (int) $event['post_data']['poll_on_index'] : ext::POLL_ON_INDEX_NO),
 			]);
 		}
 	}
