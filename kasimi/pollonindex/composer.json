@@ -3,8 +3,8 @@
     "type": "phpbb-extension",
     "description": "This extension displays selected polls on the index page.",
     "homepage": "https://kasimi.net",
-    "version": "1.0.0",
-    "time": "2018-11-17",
+    "version": "1.0.1",
+    "time": "2018-12-20",
     "license": "GPL-2.0-only",
     "authors": [
         {
