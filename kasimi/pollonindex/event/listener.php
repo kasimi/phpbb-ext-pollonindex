@@ -109,7 +109,7 @@ class listener implements EventSubscriberInterface
 	public function index_modify_page_title()
 	{
 		$topics = $this->sql_query([
-			'SELECT'	=> 't.topic_id, t.topic_title, t.topic_first_post_id, t.topic_status, t.poll_start, t.poll_length, t.poll_title, t.poll_max_options, t.poll_vote_change, t.forum_id, f.forum_status',
+			'SELECT'	=> 't.*, f.*',
 			'FROM'		=> [TOPICS_TABLE => 't'],
 			'LEFT_JOIN'	=> [
 				[
