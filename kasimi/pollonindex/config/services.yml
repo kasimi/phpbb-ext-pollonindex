@@ -1,6 +1,6 @@
 services:
     kasimi.pollonindex.listener:
-        class: kasimi\pollonindex\event\listener
+        class: 'kasimi\pollonindex\event\listener'
         arguments:
             - '@user'
             - '@language'
@@ -14,4 +14,4 @@ services:
             - '%core.php_ext%'
             - '@?phpbb.collapsiblecategories.operator'
         tags:
-            - { name: event.listener }
+            - { name: 'event.listener' }
