@@ -174,6 +174,14 @@ class listener implements EventSubscriberInterface
 				($this->auth->acl_get('f_votechg', $topic_data['forum_id']) && $topic_data['poll_vote_change']));
 			$s_display_results = !$s_can_vote || $cur_voted_id;
 
+			$forum_id = $topic_data['forum_id'];
+			$topic_id = $topic_data['topic_id'];
+			$voted_id = array_unique($this->request->variable('vote_id', ['' => 0]));
+			$viewtopic_url = append_sid($this->root_path . 'viewtopic.' . $this->php_ext, [
+				'f' => $forum_id,
+				't' => $topic_id,
+			]);
+
 			/**
 			* Event to manipulate the poll data
 			*
