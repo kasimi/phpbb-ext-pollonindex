@@ -19,7 +19,9 @@
 						</dt>
 					</dl>
 					{% if poll.S_CAN_HIDE_CATEGORY %}
-						<a href="{{ poll.U_CATEGORY_COLLAPSE_URL }}" class="collapse-btn collapse-{{ poll.S_CATEGORY_HIDDEN ? 'show' : 'hide' }}" data-hidden="{{ poll.S_CATEGORY_HIDDEN }}" data-ajax="phpbb_collapse" data-overlay="true" title="{{ lang('COLLAPSIBLE_CATEGORIES_TITLE') }}"></a>
+						{% set S_CC_FORUM_HIDDEN = poll.S_CATEGORY_HIDDEN %}
+						{% set U_CC_COLLAPSE_URL = poll.U_CATEGORY_COLLAPSE_URL %}
+						{% include '@phpbb_collapsiblecategories/collapsible_categories_button.html' ignore missing %}
 					{% endif %}
 				</li>
 			</ul>
